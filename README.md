@@ -1,41 +1,159 @@
-# SAP-samples/repository-template
-This default template for SAP Samples repositories includes files for README, LICENSE, and REUSE.toml. All repositories on github.com/SAP-samples will be created based on this template.
+# Project Aware Demonstration MCP Server
 
-# Containing Files
+## About this project
 
-1. The LICENSE file:
-In most cases, the license for SAP sample projects is `Apache 2.0`.
+This repository contains the source code of a MCP server that demonstrates how the open source or InnerSource[^innersource] use case of driving contributions of missing features to the project can be incorporated in the user experience of the server.
 
-2. The REUSE.toml file: 
-The [Reuse Tool](https://reuse.software/) must be used for your samples project. You can find the REUSE.toml in the project initial. Please replace the parts inside the single angle quotation marks < > by the specific information for your repository.
+It is primarily designed to run over streamable HTTP, simulating a remote server.
 
-3. The README.md file (this file):
-Please edit this file as it is the primary description file for your project. You can find some placeholder titles for sections below.
+The "business" use case it simulates is that of a catalog of InnerSource projects.
+It comes with a predefined and fictious list of projects.
 
-# [Title]
-<!-- Please include descriptive title -->
+The server can be run in an _opaque_ mode (default), where only business features are exposed, and a _project aware_ mode, where the server exposes project information that should lead to the contribution of missing features.
 
-<!--- Register repository https://api.reuse.software/register, then add REUSE badge:
-[![REUSE status](https://api.reuse.software/badge/github.com/SAP-samples/REPO-NAME)](https://api.reuse.software/info/github.com/SAP-samples/REPO-NAME)
--->
+**Example**:
 
-## Description
-<!-- Please include SEO-friendly description -->
+The server does not expose the number of _stars_ of the listed projects, thus, it is not possible to sort by stars.
 
-## Requirements
+On _opaque_ mode, when a user asks "list the innersource projects sorted by stars", the agentic client simply says it is not possible.
 
-## Download and Installation
+On _project aware_ mode, the agentic client notices the feature is missing, but is made aware that the project behind the MCP server is open for contributions. It offers to the user the possibility of contributing, and, given pre-requisites are met (e.g., the agentic client can access the project repository), implements the missing feature and proposes it through a Pull Request.
 
-## Known Issues
-<!-- You may simply state "No known issues. -->
+Refer to [demo-scenarios.md](docs/demo-scenarios.md) for other examples.
 
-## How to obtain support
-[Create an issue](https://github.com/SAP-samples/<repository-name>/issues) in this repository if you find a bug or have questions about the content.
- 
-For additional support, [ask a question in SAP Community](https://answers.sap.com/questions/ask.html).
+[^innersource]: InnerSource is the practice of applying Open Source methodologies, culture and best practices to in-house software development. You can learn more about it at <https://innersourcecommons.org>.
 
-## Contributing
-If you wish to contribute code, offer fixes or improvements, please send a pull request. Due to legal reasons, contributors will be asked to accept a DCO when they create the first pull request to this project. This happens in an automated fashion during the submission process. SAP uses [the standard DCO text of the Linux Foundation](https://developercertificate.org/).
+## Requirements and Setup
 
-## License
+This project requires:
+
+- Node.js 22.5 or newer, for the built-in `node:sqlite` module
+- An agentic MCP client (e.g., Joule Work Desktop, Open Code, Claude Code, etc.)
+
+To use project-aware mode and have the client contribute missing features, the client also needs access to the source code repository of this project.
+
+### Fork the repository
+
+Demo scenarios in project-aware mode can lead to the creation of pull requests.
+To avoid pull requests being sent to the upstream repository, **fork this repository** before running demo scenarios.
+
+Set the `FORK_URL` environment variable to your fork's URL so the server points the agentic client to your fork.
+
+Alternatively, create a `.env` file in the project root (it is git-ignored):
+
+```sh
+FORK_URL=https://github.com/your-org/your-fork
+```
+
+When `FORK_URL` is set, the server replaces the upstream repository URL with your fork's URL in the contribution guidelines it serves to the agentic client.
+
+### Run
+
+```sh
+npm install
+npm run dev
+```
+
+Set a different port when needed, e.g.:
+
+```sh
+PORT=8080 npm run dev
+```
+
+The MCP endpoint is available at `http://127.0.0.1:3000/mcp`, with a health check at `http://127.0.0.1:3000/health`.
+
+Configure your web-capable MCP client with the server information.
+
+The server binds to loopback and validates local Host and Origin headers.
+This makes it suitable for simulating a remote MCP endpoint on the local machine without exposing the unauthenticated demo catalog to the network.
+
+For the compiled server, use `npm run build` followed by `npm start`.
+
+To run the server in project-aware mode, pass the `--project-aware` option through npm:
+
+```sh
+npm run dev -- --project-aware
+```
+
+To run the server for a forked repository, run:
+
+```sh
+FORK_URL=https://github.com/your-org/your-fork npm run dev -- --project-aware
+```
+
+The same flag works with the compiled server:
+
+```sh
+npm start -- --project-aware
+```
+
+The `list-innersource-projects` tool returns every project with its repository and contribution guidelines URLs in both modes.
+
+For a description of demonstration scenarios, check [`docs/demo-scenarios.md`](docs/demo-scenarios.md).
+
+## Maintain the catalog
+
+Projects are persisted in a SQLite database at `data/projects.db`, which is generated and not tracked in git.
+On first start the database is created and seeded from `data/projects.yaml`;
+afterwards the database is the source of truth and the YAML file is only used as seed content.
+
+To change the seed content, edit `data/projects.yaml`.
+Each entry requires these fields:
+
+```yaml
+- name: Project name
+  description: A short description of the project.
+  repository: https://github.com/example-org/project
+  contributionGuidelines: https://github.com/example-org/project/blob/main/CONTRIBUTING.md
+  forks: 12
+  stars: 120
+  supportChannels: https://example.org/support/project
+```
+
+Delete `data/projects.db` to reseed from the YAML file on the next start.
+
+Invalid or missing fields are reported as an MCP tool error.
+The `stars` value is deliberately retained as internal catalog metadata and is not returned by the MCP server.
+This is done to easily enable a demonstration where a contribution implements the feature supporting number of stars, and the server can already serve that data after the implementation is incorporated.
+
+## Inspect the server
+
+```sh
+npx @modelcontextprotocol/inspector
+```
+
+In the Inspector, select Streamable HTTP and connect to `http://127.0.0.1:3000/mcp`.
+
+## Further Documentation
+
+Refer to the files under the [`docs`](docs) folder.
+
+Here is a description of the existing files:
+
+- [`docs/specification.md`](docs/specification.md) — context, value proposition, objectives, and a full description of the opaque and project-aware modes.
+- [`docs/capability-gap-layers.md`](docs/capability-gap-layers.md) — explains the four layers that turn a missing capability into a contribution opportunity.
+- [`docs/demo-scenarios.md`](docs/demo-scenarios.md) — step-by-step scenarios for demonstrating the server in both modes.
+- [`docs/notes-by-humans.md`](docs/notes-by-humans.md) — background history and observations written by the project authors.
+
+## Agentic engineering tools usage
+
+This project was created with the assistance of the following tools:
+
+- GitHub Copilot
+- Claude Code
+
+## Support, Feedback, Contributing
+
+This project is open to feature requests/suggestions, bug reports etc. via [GitHub issues](https://github.com/SAP-samples/project-aware-mcp-server). Contribution and feedback are encouraged and always welcome. For more information about how to contribute, the project structure, as well as additional contribution information, see our [Contribution Guidelines](CONTRIBUTING.md).
+
+## Security / Disclosure
+
+If you find any bug that may be a security problem, please follow our instructions at [in our security policy](https://github.com/SAP-samples/project-aware-mcp-server/security/policy) on how to report it. Please do not create GitHub issues for security-related doubts or problems.
+
+## Code of Conduct
+
+We as members, contributors, and leaders pledge to make participation in our community a harassment-free experience for everyone. By participating in this project, you agree to abide by its [Code of Conduct](https://github.com/SAP-samples/.github/blob/main/CODE_OF_CONDUCT.md) at all times.
+
+## Licensing
+
 Copyright 2026 SAP SE or an SAP affiliate company and project-aware-mcp-server contributors. Please see our [LICENSE](LICENSE) for copyright and license information. Detailed information including third-party components and their licensing/copyright information is available [via the REUSE tool](https://api.reuse.software/info/github.com/SAP-samples/project-aware-mcp-server).

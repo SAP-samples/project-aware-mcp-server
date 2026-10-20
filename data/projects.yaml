@@ -1,0 +1,106 @@
+projects:
+  - name: Aurora Design System
+    description: Accessible UI components and design tokens for product teams.
+    repository: https://github.com/example-org/aurora-design-system
+    contributionGuidelines: https://github.com/example-org/aurora-design-system/blob/main/CONTRIBUTING.md
+    forks: 34
+    stars: 286
+    supportChannels: https://example.org/support/aurora-design-system
+  - name: Nimbus API Toolkit
+    description: Shared utilities for building resilient service APIs.
+    repository: https://github.com/example-org/nimbus-api-toolkit
+    contributionGuidelines: https://github.com/example-org/nimbus-api-toolkit/blob/main/CONTRIBUTING.md
+    forks: 21
+    stars: 174
+    supportChannels: https://example.org/support/nimbus-api-toolkit
+  - name: Compass Observability
+    description: Dashboards, alerts, and telemetry conventions for cloud services.
+    repository: https://github.com/example-org/compass-observability
+    contributionGuidelines: https://github.com/example-org/compass-observability/blob/main/CONTRIBUTING.md
+    forks: 48
+    stars: 391
+    supportChannels: https://example.org/support/compass-observability
+  - name: Atlas Data Contracts
+    description: Versioned schemas and validation tools for analytical datasets.
+    repository: https://github.com/example-org/atlas-data-contracts
+    contributionGuidelines: https://github.com/example-org/atlas-data-contracts/blob/main/CONTRIBUTING.md
+    forks: 17
+    stars: 142
+    supportChannels: https://example.org/support/atlas-data-contracts
+  - name: Beacon Feature Flags
+    description: Lightweight feature flagging libraries for distributed applications.
+    repository: https://github.com/example-org/beacon-feature-flags
+    contributionGuidelines: https://github.com/example-org/beacon-feature-flags/blob/main/CONTRIBUTING.md
+    forks: 26
+    stars: 219
+    supportChannels: https://example.org/support/beacon-feature-flags
+  - name: Cascade Event Bus
+    description: Reliable event publishing patterns and client libraries.
+    repository: https://github.com/example-org/cascade-event-bus
+    contributionGuidelines: https://github.com/example-org/cascade-event-bus/blob/main/CONTRIBUTING.md
+    forks: 31
+    stars: 247
+    supportChannels: https://example.org/support/cascade-event-bus
+  - name: Drift Configuration
+    description: Typed configuration loading for services and command-line tools.
+    repository: https://github.com/example-org/drift-configuration
+    contributionGuidelines: https://github.com/example-org/drift-configuration/blob/main/CONTRIBUTING.md
+    forks: 12
+    stars: 96
+    supportChannels: https://example.org/support/drift-configuration
+  - name: Ember Test Fixtures
+    description: Reusable test data builders for integration test suites.
+    repository: https://github.com/example-org/ember-test-fixtures
+    contributionGuidelines: https://github.com/example-org/ember-test-fixtures/blob/main/CONTRIBUTING.md
+    forks: 15
+    stars: 128
+    supportChannels: https://example.org/support/ember-test-fixtures
+  - name: Forge Developer Portal
+    description: Service catalog plugins and templates for engineering teams.
+    repository: https://github.com/example-org/forge-developer-portal
+    contributionGuidelines: https://github.com/example-org/forge-developer-portal/blob/main/CONTRIBUTING.md
+    forks: 42
+    stars: 337
+    supportChannels: https://example.org/support/forge-developer-portal
+  - name: Grove Localization
+    description: Translation workflows and locale utilities for web applications.
+    repository: https://github.com/example-org/grove-localization
+    contributionGuidelines: https://github.com/example-org/grove-localization/blob/main/CONTRIBUTING.md
+    forks: 19
+    stars: 153
+    supportChannels: https://example.org/support/grove-localization
+  - name: Harbor Secrets Client
+    description: Provider-neutral clients for retrieving application secrets.
+    repository: https://github.com/example-org/harbor-secrets-client
+    contributionGuidelines: https://github.com/example-org/harbor-secrets-client/blob/main/CONTRIBUTING.md
+    forks: 23
+    stars: 188
+    supportChannels: https://example.org/support/harbor-secrets-client
+  - name: Keystone Identity SDK
+    description: Authentication and authorization helpers for internal products.
+    repository: https://github.com/example-org/keystone-identity-sdk
+    contributionGuidelines: https://github.com/example-org/keystone-identity-sdk/blob/main/CONTRIBUTING.md
+    forks: 37
+    stars: 304
+    supportChannels: https://example.org/support/keystone-identity-sdk
+  - name: Lantern Documentation
+    description: Documentation themes and publishing tools for technical teams.
+    repository: https://github.com/example-org/lantern-documentation
+    contributionGuidelines: https://github.com/example-org/lantern-documentation/blob/main/CONTRIBUTING.md
+    forks: 28
+    stars: 231
+    supportChannels: https://example.org/support/lantern-documentation
+  - name: Meridian Workflow Engine
+    description: Composable workflow primitives for long-running business processes.
+    repository: https://github.com/example-org/meridian-workflow-engine
+    contributionGuidelines: https://github.com/example-org/meridian-workflow-engine/blob/main/CONTRIBUTING.md
+    forks: 45
+    stars: 368
+    supportChannels: https://example.org/support/meridian-workflow-engine
+  - name: Pulse Health Checks
+    description: Standard health and readiness probes for backend services.
+    repository: https://github.com/example-org/pulse-health-checks
+    contributionGuidelines: https://github.com/example-org/pulse-health-checks/blob/main/CONTRIBUTING.md
+    forks: 14
+    stars: 117
+    supportChannels: https://example.org/support/pulse-health-checks
