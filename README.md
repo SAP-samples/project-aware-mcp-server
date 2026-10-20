@@ -1,3 +1,5 @@
+[![REUSE status](https://api.reuse.software/badge/github.com/SAP-samples/project-aware-mcp-server)](https://api.reuse.software/info/github.com/SAP-samples/project-aware-mcp-server)
+
 # Project Aware Demonstration MCP Server
 
 ## About this project
