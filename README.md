@@ -4,7 +4,7 @@
 
 ## About this project
 
-This repository contains the source code of a MCP server that demonstrates how the open source or InnerSource[^innersource] use case of driving contributions of missing features to the project can be incorporated in the user experience of the server.
+This repository contains the source code of a [Model Context Protocol](https://modelcontextprotocol.io/) (MCP) server that demonstrates how the open source or InnerSource[^innersource] use case of driving contributions of missing features to the project can be incorporated in the user experience of the server.
 
 It is primarily designed to run over streamable HTTP, simulating a remote server.
 
