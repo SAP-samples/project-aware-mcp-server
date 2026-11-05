@@ -6,6 +6,11 @@
 
 This repository contains the source code of a [Model Context Protocol](https://modelcontextprotocol.io/) (MCP) server that demonstrates how the open source or InnerSource[^innersource] use case of driving contributions of missing features to the project can be incorporated in the user experience of the server.
 
+> [!NOTE] 
+> The main demo scenario from this project is featured on the SAP Community blog post [Your MCP server is open for contributions, but do your users and their agents know about it?].
+
+[Your MCP server is open for contributions, but do your users and their agents know about it?]: https://community.sap.com/t5/artificial-intelligence-blogs-posts/your-mcp-server-is-open-for-contributions-but-do-your-users-and-their/ba-p/14508452
+
 It is primarily designed to run over streamable HTTP, simulating a remote server.
 
 The "business" use case it simulates is that of a catalog of InnerSource projects.
